@@ -9,6 +9,8 @@ interface MenuRoute {
     children?: MenuRoute[]
 }
 
+
+
 function getKey(path: string, parentPath: string) {
     return path.startsWith('http') ? path : `${parentPath}${parentPath ? '/' : ''}${path}`
 }

@@ -1,4 +1,4 @@
 export default defineAppConfig({
-    title: 'Vue3 Admin Template',
-    description: 'Vue3 Admin Template',
+    title: 'Naiveui Nuxt Admin',
+    description: 'Naiveui Nuxt Admin',
 })

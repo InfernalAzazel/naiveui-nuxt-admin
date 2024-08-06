@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type {MenuOption} from "naive-ui";
 
-const collapsed = false
+const {collapsed} = useAdminState()
 
 const route = useRoute()
 const router = useRouter()
@@ -29,10 +29,6 @@ watch(() => route.fullPath, () => {
 })
 
 onMounted(()=>{
-  console.log(router.options.routes)
-  const adminRoutes = router.options.routes.filter(route => route.path && route.path.startsWith('/admin'));
-
-  console.log(adminRoutes);
   menus.value = buildMenuList(router.options.routes)
 })
 </script>

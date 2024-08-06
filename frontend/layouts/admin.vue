@@ -9,13 +9,6 @@ const matched = route.matched
 const selectedKey = ref<string>(route.path as string)
 const openKeys = ref(matched && matched.length ? matched.map(item => item.path) : [])
 
-function clickMenuItem(key: string) {
-  if (/http(s)?:/.test(key))
-    window.open(key)
-  else
-    router.push({ path: key })
-}
-
 function updateSelectedKey() {
   const matched = route.matched
   openKeys.value = matched.map(item => item.path)
@@ -33,16 +26,24 @@ onMounted(()=>{
 
 <template>
   <NLayout position="absolute" has-sider>
-    <LayoutMenu />
+    <LayoutSider />
     <NLayout  :native-scrollbar="false">
       <NLayoutHeader>
+        <LayoutHeader />
+        <LayoutTabs />
       </NLayoutHeader>
       <NLayoutContent
+          class="h-[100%] bg-blue-50"
           embedded
           :native-scrollbar="false"
       >
-        <slot  />
+        <ClientOnly>
+          <slot  />
+        </ClientOnly>
       </NLayoutContent>
+<!--      <NLayoutFooter bordered  position="absolute">-->
+<!--        <LayoutFooter />-->
+<!--      </NLayoutFooter>-->
     </NLayout>
   </NLayout>
 
