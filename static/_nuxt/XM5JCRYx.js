@@ -1,0 +1,1 @@
+import{_ as o,o as a,c as r,d as s,a0 as n}from"./Ca437hww.js";const l={};function d(t,e){return a(),r("div",null,[e[0]||(e[0]=s(" Layout: default ")),n(t.$slots,"default")])}const f=o(l,[["render",d]]);export{f as default};

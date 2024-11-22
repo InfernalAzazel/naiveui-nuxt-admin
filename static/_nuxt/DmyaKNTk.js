@@ -1,0 +1,1 @@
+import{e as o,u as n,o as a,c as _,b as c,d as r,f as m}from"./Ca437hww.js";import{u as p}from"./B4DLD3Ti.js";const u={class:"h-full"},x=o({__name:"system",setup(l){const{t}=n();return p({title:t("pages.system.title")}),(d,e)=>{const s=m;return a(),_("div",u,[c(s),e[0]||(e[0]=r(" 666 "))])}}});export{x as default};

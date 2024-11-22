@@ -7,6 +7,7 @@ import { i18n } from './config/i18n'
 export default defineNuxtConfig({
     compatibilityDate: '2024-04-03',
     devtools: {enabled: true},
+    ssr: false,
     modules: [
         'nuxtjs-naive-ui',
         '@vueuse/nuxt',
