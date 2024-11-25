@@ -1,14 +1,15 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
 definePageMeta({
   layout: 'admin',
   // middleware: 'admin',
   title: 'pages.system.title',
-  name: 'system',
   order: 99,
   icon: 'ant-design:setting-outlined',
 })
 
-const { t } = useI18n()
+
 useHead({
   title: t('pages.system.title'),
 })

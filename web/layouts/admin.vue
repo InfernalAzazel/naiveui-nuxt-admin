@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type {MenuOption, DropdownOption} from "naive-ui";
 import {createDiscreteApi} from "naive-ui";
+import type {ProTabData} from "k-naiveui-pro";
 const {collapsed} = useAdminState()
 const route = useRoute()
 const router = useRouter()
@@ -11,6 +12,10 @@ const openKeys = ref(matched && matched.length ? matched.map(item => item.path) 
 const { message} = createDiscreteApi(
     ['message'],
 )
+const { t } = useI18n()
+const tabs = ref<ProTabData[]>([
+  // { title: '首页', path: '/admin/dashboard'},
+]);
 function updateSelectedKey() {
   openKeys.value = matched.map(item => item.path)
   selectedKey.value = route.path
@@ -54,8 +59,24 @@ function handleLanguageSelect(key: string | number) {
   // 在这里处理语言切换的逻辑
 }
 
+function handleTabSelect(path: string) {
+  message.info(path)
+  if (/http(s)?:/.test(path))
+    window.open(path)
+  else
+    router.push({ path: path })
+}
+
 watch(() => route.fullPath, () => {
   updateSelectedKey()
+  // 确保当前路由对应的选项卡已存在
+  if (!tabs.value.some((tab) => tab.path === route.fullPath)) {
+    tabs.value.push({
+      icon: route.meta.icon as string,
+      title: t(route.meta.title as string),
+      path: route.fullPath,
+    });
+  }
 })
 
 onMounted(()=>{
@@ -79,6 +100,10 @@ onMounted(()=>{
     <template #footer>
       © 2024 Your Company. All rights reserved.
     </template>
+    <ProTabs
+        v-model="tabs"
+        @select="handleTabSelect"
+    />
     <ClientOnly>
       <slot  />
     </ClientOnly>

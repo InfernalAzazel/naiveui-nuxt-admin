@@ -15,7 +15,7 @@
     "@nuxt/content": "^2.13.2",
     "@nuxtjs/i18n": "^8.3.3",
     "k-naiveui-pro": "^0.0.5",
-    "k-naiveui-pro-resolver": "^0.0.5",
+    "k-naiveui-pro-resolver": "^0.0.6",
     "nuxt": "^3.12.4",
     "nuxtjs-naive-ui": "^1.0.2",
     "vue": "latest"
