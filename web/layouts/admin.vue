@@ -1,18 +1,57 @@
 <script lang="ts" setup>
-import type {MenuOption} from "naive-ui";
-
+import type {MenuOption, DropdownOption} from "naive-ui";
+import {createDiscreteApi} from "naive-ui";
+const {collapsed} = useAdminState()
 const route = useRoute()
 const router = useRouter()
 const menus = ref<MenuOption[]>([])
 const matched = route.matched
-
 const selectedKey = ref<string>(route.path as string)
 const openKeys = ref(matched && matched.length ? matched.map(item => item.path) : [])
-
+const { message} = createDiscreteApi(
+    ['message'],
+)
 function updateSelectedKey() {
-  const matched = route.matched
   openKeys.value = matched.map(item => item.path)
   selectedKey.value = route.path
+}
+
+function clickMenuItem(key: string) {
+  if (/http(s)?:/.test(key))
+    window.open(key)
+  else
+    router.push({ path: key })
+}
+
+const options = [
+  {
+    label: '用户资料',
+    key: 'profile',
+    icon: renderIcon('ei:user')
+  },
+  {
+    label: '编辑用户资料',
+    key: 'editProfile',
+    icon: renderIcon('material-symbols-light:edit-sharp')
+  },
+  {
+    label: '退出登录',
+    key: 'logout',
+    icon: renderIcon('material-symbols-light:logout')
+  }
+]
+function handleSelect(key: string | number) {
+  message.info(String(key))
+}
+
+const languageOptions = ref<DropdownOption[]>([
+  { label: 'English', key: 'en' },
+  { label: '中文', key: 'zh' },
+  { label: 'Español', key: 'es' }
+])
+function handleLanguageSelect(key: string | number) {
+  message.info(`选择的语言键值为：${key}`)
+  // 在这里处理语言切换的逻辑
 }
 
 watch(() => route.fullPath, () => {
@@ -25,27 +64,25 @@ onMounted(()=>{
 </script>
 
 <template>
-  <NLayout position="absolute" has-sider>
-    <LayoutSider />
-    <NLayout  :native-scrollbar="false">
-      <NLayoutHeader>
-        <LayoutHeader />
-        <LayoutTabs />
-      </NLayoutHeader>
-      <NLayoutContent
-          class="h-[100%] bg-blue-50"
-          embedded
-          :native-scrollbar="false"
-      >
-        <ClientOnly>
-          <slot  />
-        </ClientOnly>
-      </NLayoutContent>
-<!--      <NLayoutFooter bordered  position="absolute">-->
-<!--        <LayoutFooter />-->
-<!--      </NLayoutFooter>-->
-    </NLayout>
-  </NLayout>
+
+  <ProLayout
+      v-model:collapsed="collapsed"
+      :menus="menus"
+      :clickMenuItem="clickMenuItem"
+      :selectedKey="selectedKey"
+  >
+    <template #actions>
+      <pro-toggle-theme />
+      <pro-toggle-language :options="languageOptions" @select="handleLanguageSelect"/>
+      <pro-avatar class="w-40" :options="options" name="admin" @select="handleSelect" round/>
+    </template>
+    <template #footer>
+      © 2024 Your Company. All rights reserved.
+    </template>
+    <ClientOnly>
+      <slot  />
+    </ClientOnly>
+  </ProLayout>
 
 </template>
 
