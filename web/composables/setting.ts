@@ -6,7 +6,7 @@ interface GlobalState {
     locale: string;
 }
 
-export const useAppSettingState = createGlobalState(() =>
+export const useGlobalState = createGlobalState(() =>
     useStorage<GlobalState>('app-setting', {
         token_type: '',
         access_token: '',

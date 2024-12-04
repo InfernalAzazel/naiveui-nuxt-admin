@@ -1,3 +1,5 @@
+import {useGlobalState} from "@/composables/setting";
+
 export default defineNuxtPlugin((nuxtApp) => {
 
     const api = $fetch.create({

@@ -1,5 +1,4 @@
-import type { NuxtI18nOptions } from '@nuxtjs/i18n'
-import type { LocaleObject } from '#i18n'
+import type {LocaleObject, NuxtI18nOptions} from '@nuxtjs/i18n'
 
 const locales: LocaleObject [] = [
   {

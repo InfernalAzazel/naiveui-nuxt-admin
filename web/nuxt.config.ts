@@ -13,17 +13,13 @@ export default defineNuxtConfig({
         '@nuxt/content',
         '@unocss/nuxt',
     ],
-    imports: {
-        dirs: [
-            'composables/**/*',
-        ],
-    },
     i18n,
-    routeRules: {
-        '/': {prerender: true},
-        '/admin/**': {ssr: false},
-        '/admin': {redirect: '/admin/dashboard'},
-        '/docs/**': {ssr: false},
-        '/api/**': {cors: true},
-    },
+    // routeRules: {
+    //     '/': {prerender: true},
+    //     '/admin/**': {ssr: false},
+    //     '/admin': {redirect: '/admin/dashboard'},
+    //     '/admin/system': {redirect: '/admin/system/menu'},
+    //     '/docs/**': {ssr: false},
+    //     '/api/**': {cors: true},
+    // },
 })

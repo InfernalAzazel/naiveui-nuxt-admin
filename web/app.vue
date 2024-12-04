@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import '@unocss/reset/tailwind-compat.css'
+import type { GlobalTheme } from 'naive-ui'
+const theme = ref<GlobalTheme | null>(null)
 </script>
 <template>
   <NConfigProvider
-      :inline-theme-disabled="true"
+      :theme="theme"
   >
     <!--      <NuxtLoadingIndicator :color="themeColor" />-->
 
